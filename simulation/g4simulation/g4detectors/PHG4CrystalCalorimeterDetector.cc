@@ -1830,8 +1830,8 @@ PHG4CrystalCalorimeterDetector::DefaultConstruct(G4LogicalVolume* ecalenvelope)
 	G4double carbonThickness, airGap, airGap_Crystal;
 	CarbonFiberSpacing( carbonThickness, airGap, airGap_Crystal);
 
-	G4double crystal_dx = 20*mm + carbonThickness; 
-	G4double crystal_dy = 20*mm + carbonThickness; 
+	G4double crystal_dx = 20*mm + carbonThickness + airGap; 
+	G4double crystal_dy = 20*mm + carbonThickness + airGap; 
 	G4double crystal_dz = _dz_crystal;
 
 	G4double r_min = _rMin2;
@@ -1934,8 +1934,8 @@ PHG4CrystalCalorimeterDetector::FillDefaultCrystal(G4LogicalVolume *crystal_logi
 	G4double carbonThickness, airGap, airGap_Crystal;
 	CarbonFiberSpacing( carbonThickness, airGap, airGap_Crystal);
 	
-	const G4double crystal_dx = 20*mm + carbonThickness; 
-	const G4double crystal_dy = 20*mm + carbonThickness; 
+	const G4double crystal_dx = 20*mm + carbonThickness + airGap; 
+	const G4double crystal_dy = 20*mm + carbonThickness + airGap; 
 	const G4double crystal_dz =  _dz_crystal;
 
 	//*************************************
@@ -1946,8 +1946,8 @@ PHG4CrystalCalorimeterDetector::FillDefaultCrystal(G4LogicalVolume *crystal_logi
 	crystal_solid_name.str("");
 	crystal_solid_name << _crystallogicnameprefix << "_solid"; 
 
-	G4double lead_dx = (( crystal_dx / 2.0 ) - carbonThickness);
-	G4double lead_dy = (( crystal_dy / 2.0 ) - carbonThickness);
+	G4double lead_dx = (( crystal_dx - carbonThickness)/2.0);
+	G4double lead_dy = (( crystal_dy - carbonThickness)/2.0);
 	
 	G4VSolid* lead_solid = new G4Box( crystal_solid_name.str().c_str(),
 		lead_dx,
